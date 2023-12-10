@@ -1,0 +1,77 @@
+Inheritance in Kotlin is a fundamental concept of object-oriented programming that allows a class to inherit properties and behaviors from another class. Kotlin supports both single and multiple inheritance through the use of classes and interfaces. Here's an overview of how inheritance works in Kotlin:
+
+### 1. Single Inheritance:
+
+#### Base Class (Superclass):
+
+```kotlin
+open class Animal(val name: String) {
+    open fun makeSound() {
+        println("Generic animal sound")
+    }
+}
+```
+
+The `open` keyword indicates that the class and its members can be overridden in subclasses.
+
+#### Derived Class (Subclass):
+
+```kotlin
+class Dog(name: String, val breed: String) : Animal(name) {
+    override fun makeSound() {
+        println("Woof, woof!")
+    }
+}
+```
+
+The `: Animal(name)` syntax denotes that `Dog` inherits from the `Animal` class.
+
+### 2. Multiple Inheritance (Interfaces):
+
+#### Interface:
+
+```kotlin
+interface CanFly {
+    fun fly()
+}
+```
+
+#### Class Implementing Interface:
+
+```kotlin
+class Bird(name: String) : Animal(name), CanFly {
+    override fun makeSound() {
+        println("Tweet, tweet!")
+    }
+
+    override fun fly() {
+        println("$name is flying")
+    }
+}
+```
+
+Here, the `Bird` class inherits from both the `Animal` class and the `CanFly` interface.
+
+### Usage:
+
+```kotlin
+fun main() {
+    val dog = Dog("Buddy", "Labrador")
+    dog.makeSound()
+
+    val bird = Bird("Robin")
+    bird.makeSound()
+    bird.fly()
+}
+```
+
+In the `main` function, instances of `Dog` and `Bird` are created, and their inherited methods are called.
+
+### Key Points:
+
+- Use `open` to allow a class or function to be overridden.
+- Use `: SuperclassName` to inherit from a class.
+- Use `: InterfaceName` to implement an interface.
+- The `override` keyword is used to indicate that a member function or property is intended to override a superclass member.
+
+Remember that Kotlin classes are `final` by default, meaning they cannot be inherited unless explicitly marked with `open`. Additionally, Kotlin does not support multiple inheritance for classes (i.e., inheriting from more than one class), but it supports multiple inheritance for interfaces.
